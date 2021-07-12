@@ -145,6 +145,7 @@ class Appointments(models.Model):
     total_amount = models.IntegerField(blank=True, null=True)
     blood_category = models.TextField(max_length=1000, blank=True, null=True)
     blood_category_detail = models.TextField(max_length=1000, blank=True, null=True)
+    blood_category_price=models.TextField(max_length=1000, blank=True, null=True)
     appointment_number = models.CharField(max_length=20)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)

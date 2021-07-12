@@ -69,14 +69,10 @@
                                 <p style="color:black">  name: {{order.full_name}} <br>
                                    phone: {{order.phone}} <br>
                                    hospital: {{order.hospital.hospital_name}}
-                                   {%for blood in blood_list%}
-                                   {% with outer_counter=forloop.counter %}
-                                   {% for name, price in blood.items %}
-                                   Blood Category: {{name}} <br>
-                                   price: {{price}} <br>
-                                   {% endfor %}
-                                   {% endwith %}
-                                   {% endfor %}
+                                   
+                                   Blood Category: {{order.blood_category}}<br>
+                                   price: {{order.blood_category_price}} <br>
+                                  
                                 date: {{order.date}}, {{order.time}}</p>
                             </a></th>
                             
@@ -124,22 +120,10 @@
                             
                            
                             <td>
-                            {% for blood in  blood_list %}
-                            {% with outer_counter=forloop.counter %}
-                            {% for name, price in blood.items %}
-                                {{price}}, 
-                            {% endfor %}
-                            {% endwith %}
-                            {% endfor %}
+                            {{order.blood_category_price}}
                             </td>
                             <td>
-                                {% for blood in  blood_list %}
-                                {% with outer_counter=forloop.counter %}
-                                {% for name, price in blood.items %}
-                                    {{name}}, 
-                                {% endfor %}
-                                {% endwith %}
-                                {% endfor %}
+                                {{order.blood_category}}
                             </td>
                             
                             
@@ -252,25 +236,17 @@
                             <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.hospital.hospital_name}}</td>
                            
                             <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
-                                {% for blood in  blood_list %}
-                                {% with outer_counter=forloop.counter %}
-                                {% for name, price in blood.items %}
-                                {{price}},
+                                
+                                {{order.blood_category_price}}
                                
-                                {% endfor %}
-                                {% endwith %}
-                                {% endfor %}
+                               
                                 
                             </td>
                             <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
-                                {% for blood in  blood_list %}
-                                {% with outer_counter=forloop.counter %}
-                                {% for name, price in blood.items %}
-                                {{name}},
                                
-                                {% endfor %}
-                                {% endwith %}
-                                {% endfor %}
+                                {{order.blood_category}}
+                               
+                               
                                 
                             </td>
                            
