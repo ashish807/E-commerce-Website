@@ -165,7 +165,7 @@ def appointments(request):
         for blood in blood_category:
             try:
                 blood_category_list.append(request.POST[str(blood.category_name)])
-                blood_dic[str(blood.category_name)] = str(blood.category_price)
+                blood_dic[str(blood.category_name)] = blood.category_price
                 total_amount += blood.category_price
 
                 
@@ -191,6 +191,7 @@ def appointments(request):
             data.blood_category = blood_string
             data.blood_category_detail = blood_dic
             data.hospital = Hospital.objects.get(hospital_name__iexact = hospital)
+            data.total_amount = total_amount
             data.date =form.cleaned_data['date']
             data.time = form.cleaned_data['time']
             data.ip=request.META.get('REMOTE_ADDR')
@@ -207,17 +208,17 @@ def appointments(request):
             data.save()
  
             appointment_details = Appointments.objects.filter(user = request.user, vendorConfirmation=False)
-            # sub_total = 0
+            sub_total = 0
             
-            # for detail in appointment_details:
-            #     sub_total += detail.blood_category.category_price
+            for detail in appointment_details:
+                sub_total += detail.total_amount
             
-            tax = (total_amount * 2)/100
-            total = total_amount + tax
+            tax = (sub_total * 2)/100
+            total = sub_total + tax
             
             context = {
                 'appointment_details':appointment_details,
-                'sub_total':total_amount,
+                'sub_total':sub_total,
                 'tax':tax,
                 'total':total,
                 'blood_dic':blood_dic
@@ -235,7 +236,7 @@ def appointments(request):
                 sub_total = 0
                 
                 for detail in appointment_details:
-                    sub_total+= detail.blood_category.category_price
+                    sub_total+= detail.total_amount
                 
                 tax = (sub_total * 2)/100
                 total = sub_total + tax
@@ -276,10 +277,15 @@ def payment_appoinment(request):
             sub_total = 0
             tax=0
             total=0
+            blood_list =[]
             
-                
             for detail in appointments:
-                sub_total+= detail.blood_category.category_price
+                import ast
+                print(detail.blood_category_detail)
+                blood_dic = detail.blood_category_detail
+                blood = ast.literal_eval(blood_dic)
+                blood_list.append(blood)
+                sub_total+= detail.total_amount
                 tax = (sub_total * 2)/100
                 total = sub_total + tax
             user =request.user
@@ -298,6 +304,7 @@ def payment_appoinment(request):
                         'total':total,
                         'admin':False,
                         'current_date':current_date,
+                        'blood_list':blood_list,
                     })
             to_email = request.user.email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
@@ -312,6 +319,7 @@ def payment_appoinment(request):
                         'tax':tax,
                         'total':total,
                         'current_date':current_date,
+                        'blood_list':blood_list,
                        
                     })
             for appoint in appointments:
@@ -331,6 +339,7 @@ def payment_appoinment(request):
                 appointment.is_billed = True
                 appointment.save()
             # address_details = AddAddress.objects.get(user = request.user)
+            print(type(appointments))
             context = {
                 'appointments':appointments,
                 'sub_total':sub_total,
@@ -339,9 +348,11 @@ def payment_appoinment(request):
                 'user':user,
                 # 'address_details':address_details,
                 'current_date':current_date,
+                'blood_list': blood_list,
             }
  
             return render(request, 'appointment/order_complete.html',context)
+            # return redirect('site-landing')
 
 
 

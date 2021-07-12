@@ -142,6 +142,7 @@ class Appointments(models.Model):
     report = models.FileField(blank=True, null=True)
     user = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True)
     hospital = models.ForeignKey(Hospital, on_delete=models.SET_NULL, null=True)
+    total_amount = models.IntegerField(blank=True, null=True)
     blood_category = models.TextField(max_length=1000, blank=True, null=True)
     blood_category_detail = models.TextField(max_length=1000, blank=True, null=True)
     appointment_number = models.CharField(max_length=20)
