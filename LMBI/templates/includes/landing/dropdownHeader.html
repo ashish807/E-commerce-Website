@@ -1,0 +1,206 @@
+{%load static%}
+
+<!-- Start of .header-middle -->
+ <header class="header-middle header-middle_white-transparent" style="margin-bottom: 80px;">
+    <div class="container">
+
+
+
+
+        <!-- hidden navbar for mobiles -->
+        <div class="navbar-logo">
+            <a href="{%url 'site-landing'%}">
+                <span style="text-shadow: 2px 2px black;">
+                    <!-- <h1>Medi-Book</h1> -->
+                    <img src='{%static "base/images/LogoPNG.PNG"%}'  alt="" style="height:3.5rem; width:8rem">
+                </span>
+            </a>
+        </div>
+        <div class="navbar-icon">
+            <span></span>
+        </div>
+        <!-- End of hidden navbar for mobiles -->
+
+
+
+
+
+
+        <!-- navbar__menu-link clicked jquery -> event.preventDefoult() -->
+        <div class="navbar" >
+
+            <ul class="navbar__menu menu-item" >
+
+
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'site-about' %}">About Us</a>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'store' %}">Store</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a class="navbar__submenu-link" href="{% url 'cart' %}">Go to Cart</a>
+                            {%for category in links%}
+                                <a href="{{category.get_url}}" class="navbar__submenu-link">
+                                    {{category.category_name}}
+                                </a>
+                            {%endfor%}
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'btMain' %}">Blood Tests</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="{% url 'make_appointments' %}" class="navbar__submenu-link">Book Blood Test</a>
+                            <a href="{% url 'btCovid' %}" class="navbar__submenu-link">Covid19</a>
+                            <a href="{% url 'btCBC' %}" class="navbar__submenu-link">CBC</a>
+                            <a href="{% url 'btCholestrol' %}" class="navbar__submenu-link">Cholestrol</a>
+                        </li>
+                    </ul>
+                </li>
+
+
+
+                {% if user.is_authenticated %}
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link" href="{% url 'my_orders' %}">My Orders</a>
+                    </li>
+                {% endif %}
+
+
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">Account Activity</a>
+                    <ul class="navbar__submenu">
+
+                        {% if user.is_authenticated %}
+                            <li class="navbar__submenu-item">
+                                <a href="{% url 'dashboard' %}" class="navbar__submenu-link">Dashboard</a>
+                            </li>
+                            <li class="navbar__submenu-item">
+                                <a href="{% url 'logout' %}" class="navbar__submenu-link">Logout</a>
+                            </li>
+                        {% else %}
+                            <li class="navbar__submenu-item">
+                                <a href="{% url 'login' %}" class="navbar__submenu-link">Login</a>
+                            </li>
+                            <li class="navbar__submenu-item">
+                                <a href="{% url 'register' %}" class="navbar__submenu-link">Register</a>
+                            </li>
+                        {% endif %}
+                        
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'enquiry' %}">Enquiry</a>
+                </li>
+
+                {% if user.is_authenticated %}
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="navbar__menu-item">
+                        <a class="navbar__menu-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+            </ul>
+
+
+
+
+            <div class="navbar__right">
+
+                <div class="navbar__bag">
+
+                    <svg width="25.16" height="26" viewBox="0 0 25.16 25.125">
+                        <path id="bag.svg" class="cls-3"
+                            d="M1049.15,437.286h-6.46l0.94,3.736a0.794,0.794,0,0,1-.58.951,0.677,0.677,0,0,1-.19.024,0.786,0.786,0,0,1-.76-0.6l-1.03-4.116h-8.99l-1.03,4.116a0.786,0.786,0,0,1-.76.6,0.677,0.677,0,0,1-.19-0.024,0.78,0.78,0,0,1-.57-0.951l0.93-3.736H1024v-1.569h6.85l1.82-7.258a0.784,0.784,0,1,1,1.52.382l-1.72,6.876h8.21l-1.72-6.876a0.784,0.784,0,1,1,1.52-.382l1.82,7.258h6.85v1.569Zm-22.01,3.089,1.48,11.043h15.91l1.48-11.043v-1.518h1.57l-0.01,1.674-1.66,12.458h-18.67l-1.67-12.562v-1.57h1.57v1.518Z"
+                            transform="translate(-1024 -427.875)"/>
+                    </svg>
+                    <span class="navbar__bag-count">{{ cart_count }}</span>
+                    <span class="navbar__bag-price">₹ {{ total }}</span>
+
+                    <!-- checkBox -->
+                    <div class="checkBox">
+
+
+                    {% if quantityNAV == 0 %}
+                        <h3><center>No items in Cart</center></h3>
+                        <a href="{% url 'store' %}" class="btn btn_pink">Go to Store</a>
+                    </div>
+
+                    {% else %}
+                        <ul class="products">
+                            {%for cart_item in cart_itemss%}
+
+                            <li class="products-item">
+                                <div class="img">
+                                    <img src="{{cart_item.product.image.url}}">
+                                </div>
+
+                                <div class="text">
+                                    <h1 class="name">{{cart_item.product.product_name}}</h1>
+
+                                    {%if cart_item.variation.all%}
+                                        <h9>
+                                            {%for item in cart_item.variation.all%}
+                                                {{item.variation_value | capfirst}}
+                                            {%endfor%}
+                                        </h9> 
+                                    {%endif%}
+                                
+                                    <p class="price"><span>₹ </span>{{cart_item.product.price}}</p>
+                                </div>
+                                
+                                <a href="{%url 'remove_cart_item' cart_item.product.id cart_item.id%}" onclick="return confirm('Are you sure you want to delete?')" style="color:red">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+
+                            </li>
+                                
+                            {% endfor %}
+                        </ul>
+
+                        <div class="products-total">
+                            <span>Total</span>
+                            <span><span>₹ </span>{{ total }}</span>
+                        </div>
+                        {%if user.is_authenticated%}
+                            <a href="{% url 'cart' %}" class="btn btn_pink">Go to Cart</a>
+                        {%else%}
+                            <a href="{% url 'checkout' %}" class="btn btn_pink">Login</a>
+                            <br>
+                            <br>
+                            <a href="{% url 'checkout_guest' %}" class="btn btn_pink">Order as Guest</a>
+                        {%endif%}
+                    </div>
+                    {%endif%}
+
+                </div>
+
+
+                <div class="navbar__search searchBox-open">
+                    <svg width="24.71" height="25.687" viewBox="0 0 24.71 24.687">
+                        <path id="search.svg" class="cls-3"
+                            d="M1144.4,440.468l8.19,8.178-3.47,3.467-8.19-8.178,1.18-1.177-1.38-1.385a7.878,7.878,0,1,1,1.11-1.11l1.38,1.383Zm-2.36-5.172a6.29,6.29,0,1,0-6.29,6.282A6.293,6.293,0,0,0,1142.04,435.3Zm8.33,13.35-3.61-3.6-1.24,1.245,3.6,3.6Zm-5.97-3.465,1.25-1.246-1.25-1.245-1.24,1.245Zm-11.79-9.885h-1.57a4.715,4.715,0,0,1,4.71-4.712v1.57A3.146,3.146,0,0,0,1132.61,435.3Z"
+                            transform="translate(-1127.88 -427.438)"/>
+                    </svg>
+                </div>
+
+                <a href="{% url 'make_appointments' %}" class="btn  btn_pink">MAKE AN APPOINTMENT</a>
+
+            </div>
+
+
+        </div>
+    </div>
+</header>
+<!-- End of .header-middle -->

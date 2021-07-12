@@ -1,0 +1,151 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block content%}
+    
+    
+    
+    <!-- Start of .header-bottom-4 -->
+    <header class="header-bottom-4">
+        <img src="{% static 'base/images/banner/banner9.jpg' %}">
+        <div class="header-bottom-4__bg">
+            <div class="icon">
+                <img src="{% static 'base/images/banner/banner-shape.png' %}">
+            </div>
+        </div>
+        <div class="container">
+            <!-- {%if 'search' in request.path%}
+                <h2 class="title-page">Search Result</h2>
+            {%else%}
+                <h2 class="title-page">Our Store</h2>
+            {%endif%} -->
+
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'site-landing' %}">Home</a></li>
+                <li class="breadcrumb-item active">Store</li>
+            </ol>
+        </div>
+    </header>
+    <!-- End of .header-bottom-4 -->    
+    
+ <!-- Start of .shop -->
+ <section class="shop main-blog">
+    <div class="main-blog__bg">
+        <div class="icon">
+            <!-- <img src="./images/png-shapes/form-shape.png"> -->
+        </div>
+        <div class="icon">
+            <!-- <img src="./images/png-shapes/specialists__left-bottom-shape.png"> -->
+        </div>
+    </div>
+    <div class="container container_left-sidebar">
+        <div class="article">
+            <div class="shop-block">
+                <div class="shop-block__header">
+                    <h1>Found {{product_count}} items</h1>
+
+                    <!-- <form>
+                        <div class="select-box">
+                            <i class="fa fa-angle-down"></i>
+                            <select>
+                                <option selected>Defoult Sorting</option>
+                                <option>Defoult Sorting 2</option>
+                                <option>Defoult Sorting 3</option>
+                                <option>Defoult Sorting 4</option>
+                            </select>
+                        </div>
+                    </form> -->
+                </div>
+
+                <div class="shop-block__card">
+                {%for product in products%}
+                    <a href="{{product.get_url}}" class="shop-block__card-item new">
+                        <div class="img">
+                            <div class="icon">
+                                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="25" height="11" viewBox="0 0 25 11"><path id="arrow-right-hover.svg" class="cls-2" d="M3302.09,1957v-1h-22.83v1h22.83Zm-4.35,4.2,0.82,0.79,4.89-4.71,0.81-.78-0.81-.79-4.89-4.7-0.82.78,4.89,4.71Z" transform="translate(-3279.25 -1951)"/></svg> -->
+                            <!-- <img src="{{product.image.url}}" alt="" style="width: 15rem; height:10rem"> -->
+                            </div>
+                            <img src="{{product.image.url}}" alt="" style="width: 18rem; height:18rem">
+                            <!--270x270-->
+                        </div>
+                        <div class="content">
+                            <div class="text">
+                                <h1 class="name">{{product.product_name}}</h1>
+                                <span class="price">₹ <span>{{product.price}}</span></span>
+                            </div>
+                            <!-- <div class="basket">
+                                <svg width="25.16" height="25.125" viewBox="0 0 25.16 25.125">
+                                    <path id="bag.svg" class="cls-2"
+                                        d="M1049.15,437.286h-6.46l0.94,3.736a0.794,0.794,0,0,1-.58.951,0.677,0.677,0,0,1-.19.024,0.786,0.786,0,0,1-.76-0.6l-1.03-4.116h-8.99l-1.03,4.116a0.786,0.786,0,0,1-.76.6,0.677,0.677,0,0,1-.19-0.024,0.78,0.78,0,0,1-.57-0.951l0.93-3.736H1024v-1.569h6.85l1.82-7.258a0.784,0.784,0,1,1,1.52.382l-1.72,6.876h8.21l-1.72-6.876a0.784,0.784,0,1,1,1.52-.382l1.82,7.258h6.85v1.569Zm-22.01,3.089,1.48,11.043h15.91l1.48-11.043v-1.518h1.57l-0.01,1.674-1.66,12.458h-18.67l-1.67-12.562v-1.57h1.57v1.518Z"
+                                        transform="translate(-1024 -427.875)" /></svg>
+                            </div> -->
+                        </div>
+                    </a>
+                {%endfor%}
+
+                </div>
+                {%if products.has_other_pages%}
+                    <ul class="my-pagination">
+                        {%if products.has_previous%}
+                            <li>
+                                <a  href="?page={{products.previous_page_number}}"><span class="fa fa-angle-left"></span></a>
+                            </li>
+                        {%else%}
+                            <li class="disabled">
+                                <span class="fa fa-angle-left"></span>
+                            </li>
+                        {%endif%}
+                        {%for i in products.paginator.page_range%}
+                            {%if products.number == i %}
+                                <li class="active">
+                                    <a href="#">{{i}}</a>
+                                </li>
+                            {%else%}
+                                <li ><a href="?page={{i}}">{{i}}</a></li>
+                            {%endif%}
+                        {%endfor%}
+                        {%if products.has_next%}
+                            <li >
+                                <a  href="?page={{products.next_page_number}}"><span class="fa fa-angle-right"></span></a>
+                            </li>
+                        {%else%}
+                            <li ><a  href="#"><span class="fa fa-angle-right"></span></a></li>
+                        {%endif%}
+                {%endif%}
+                    </ul>
+                
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="shop-sidebar">
+            
+          
+                <div class="shop-sidebar__categories" style="background-color: white; border-radius: 3%; border-color: #1f3d9d;  border-style: solid;border-width: 2px;">
+                  
+                    <h1 class="title" style="margin-left: 8px;"><br>Categories</h1>
+                    <ul class="list"  style="margin-left: 8px;">
+                        <li class="list-item"><a href="{%url 'store'%}"><span class="text" >All Products</span><span
+                                    class="count"></span></a></li>
+                    {%for category in links%}
+                        <li class="list-item"><a href="{{category.get_url}}"><span class="text" >{{category.category_name}}</span><span
+                                    class="count"></span></a></li>
+                    {%endfor%}
+
+                       
+                    </ul>
+                </div>
+                <!-- <div class="shop-sidebar__filter-price">
+               
+                </div>
+                <div class="shop-sidebar__new-arrivals">
+                   
+                </div> -->
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End of .shop -->
+    
+{%endblock%}
+  

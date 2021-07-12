@@ -1,0 +1,220 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block content%}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg" style="margin-bottom: 100px;">
+
+ {% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row">
+        
+       
+            <nav class="col-4">
+                <!--   SIDEBAR   -->
+                <div>
+                    {% include 'includes/dashboard_sidebar.html' %}
+                </div>
+            <br>
+            <br>
+            
+                
+                <!--   SIDEBAR .//END   -->
+            </nav>
+            <div class="col-8 my-order-image">
+                <img src="{%static 'base/images/or.PNG'%}" alt="" >
+            </div>
+     
+       
+        <main class="col-12 laptop-view">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Your Order history</strong>
+                <span>{{user.full_name}}</span>
+            </header>
+            <div class="card-body">
+                
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">Order #</th>
+                                <th scope="col">Billing Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Order Total</th>
+                                <th scope="col">Date</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% if orders != False%}
+                                    {% for order in orders %}
+                                    <tr>
+                                        <th scope="row"> <a href="{%url 'order_detail' order.order_number%}">{{order.order_number}}</a> </th>
+                                        <td>{{order.get_full_name}}</td>
+                                        <td>{{order.phone}}</td>
+                                        <td>{{order.order_total}}</td>
+                                        <td>{{order.created_at}}</td>
+                                    </tr>
+                                {% endfor %}
+                                {%else%}
+                                        <th scope="row"> <a href="">NILL</a> </th>
+                                        <td>NILL</td>
+                                        <td>NILL</td>
+                                        <td>NILL</td>
+                                        <td>NILL</td>
+                                {%endif%}
+                            </tbody>
+                          </table>
+                        
+                        
+            </div> <!-- card-body .// -->
+             <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+        <main class="col-12 mobile-view">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Your Order history</strong>
+                <span>{{user.full_name}}</span>
+            </header>
+            <div class="card-body">
+                
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col">Order Detail</th>
+                             
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% if orders != False%}
+                                    {% for order in orders %}
+                                    <tr>
+                                        <th scope="row"> <a href="{%url 'order_detail' order.order_number%}">
+                                            id: {{order.order_number}} <br>
+                                            <p style="color: black;">name: {{order.get_full_name}} <br>
+                                                phone: {{order.phone}} <br>
+                                                total: {{order.order_total}} <br>
+                                                date: {{order.created_at}}</p>
+                                            
+                                        </a> </th>
+                                            
+                                            
+                                       
+                                    </tr>
+                                {% endfor %}
+                                {%else%}
+                                        <th scope="row"> <a href="">NILL</a> </th>
+                                        <td>NILL</td>
+                                       
+                                        <td>NILL</td>
+                                        <td>NILL</td>
+                                {%endif%}
+                            </tbody>
+                          </table>
+                        
+                        
+            </div> <!-- card-body .// -->
+             <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+
+
+
+        <main class="col-12 mobile-view" style="margin-top:20px;">
+            <article class="card ">
+                <header class="card-header">
+                    <strong class="d-inline-block mr-3">Your Blood Test history</strong>
+                    <span>{{user.full_name}}</span>
+                </header>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Appointment Details</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if appointments != False%}
+                        {% for order in appointments %}
+                        <tr>
+                            <th scope="row"> <a href="{%if order.report%}{{order.report.url}}{%else%}{%url 'my_orders'%}{%endif%}" target="_blank">{{order.appointment_number}}
+                                <p style="color:black">  name: {{order.full_name}} <br>
+                                   phone: {{order.phone}} <br>hospital: {{order.hospital.hospital_name}} <br>Blood Category: {{order.blood_category.category_name}} <br>
+                                   price: {{order.blood_category.category_price}} <br>
+                                date: {{order.date}}, {{order.time}}</p>
+                            </a></th>
+                            
+                        </tr>
+                        {% endfor %}
+                    {%else%}
+                        <tr>
+                            <th scope="row"> <a href="#">NILL</a> </th>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                        </tr>
+                    {%endif%}
+                </tbody>
+              </table>
+        
+          </main>
+            
+        <main class="col-12 laptop-view" style="margin-top:20px;">
+            <article class="card ">
+                <header class="card-header">
+                    <strong class="d-inline-block mr-3">Your Blood Test history</strong>
+                    <span>{{user.full_name}}</span>
+                </header>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Appointment #</th>
+                    <th scope="col">Billing Name</th>
+                    <th scope="col">Hospital</th>
+                    <th scope="col">Test</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if appointments != False%}
+                        {% for order in appointments %}
+                        <tr>
+                            <th scope="row"> <a href="{%if order.report%}{{order.report.url}}{%else%}{%url 'my_orders'%}{%endif%}" target="_blank">{{order.appointment_number}}</a> </th>
+                            <td>{{order.full_name}} <br> {{order.phone}}
+                            </td>
+                            <td>{{order.hospital.hospital_name}}</td>
+                            <td>{{order.blood_category.category_name}}</td>
+                            <td>{{order.blood_category.category_price}}</td>
+                            <td>{{order.date}}, {{order.time}}</td>
+                        </tr>
+                        {% endfor %}
+                    {%else%}
+                        <tr>
+                            <th scope="row"> <a href="#">NILL</a> </th>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                        </tr>
+                    {%endif%}
+                </tbody>
+              </table>
+        
+          </main>
+        </article>
+    </div> <!-- row.// -->
+    </div>
+    <br><br>
+
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+
+{%endblock%}

@@ -1,0 +1,282 @@
+{%extends 'base.html'%}
+{% load static %}
+
+{%block content%}
+
+
+    <center>
+        <i class="fa fa-check-circle" style="font-size: 72px;margin-bottom: 20px;color: #28A745;"></i>
+        <br>
+        <h2 class="text-center">Payment Successful</h2>
+        <br>
+        <div class="text-center">
+            <a href="{% url 'store' %}" class="btn btn-success">Shop more</a>
+            <button onclick="saveDiv()" class="btn btn-primary">DOwnload Bill</button>
+        </div>
+    </center>
+    
+    <br>
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg " style="margin-bottom: 100px;">
+   
+
+ {% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-12 my-order-image">
+                <img src="{%static 'base/images/or.PNG'%}" alt="" >
+            </div>
+     
+       
+        <main class="col-12">
+            <article class="card">
+            <header class="card-header" style="background: linear-gradient(to right, #28aae1, #0173bd);">
+                <img src="{%static 'base/images/LogoPNG.png'%}" alt="" style="float: right; height: 6.5rem; width: 9rem;">
+
+                <strong class="d-inline-block mr-3" style="color:white">Medi-Book-India</strong><br>
+
+                <span style="color:white">Ghaziabad, Uttar Pradesh</span> <br>
+                <span style="color:white">0123456789</span> <br>
+                <span style="color:white">mbi@gmail.com</span> <br>
+            </header>
+            
+             <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+
+        <main class="col-12 mobile-view" style="margin-top:20px;">
+            <article class="card ">
+                <header class="card-header">
+                    <strong class="d-inline-block mr-3">Billing To</strong>
+                    <span>{{user.full_name}}</span>
+                </header>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Appointment Details</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                    {% if appointments != False%}
+                        {% for order in appointments %}
+                        <tr>
+                            <th scope="row"> <a href="#">{{order.appointment_number}}
+                                <p style="color:black">  name: {{order.full_name}} <br>
+                                   phone: {{order.phone}} <br>
+                                   hospital: {{order.hospital.hospital_name}}
+                                   Blood Category: {{order.blood_category.category_name}} <br>
+                                   price: {{order.blood_category.category_price}} <br>
+                                date: {{order.date}}, {{order.time}}</p>
+                            </a></th>
+                            
+                        </tr>
+                        {% endfor %}
+                    {%else%}
+                        <tr>
+                            <th scope="row"> <a href="#">NILL</a> </th>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                            <td>NILL</td>
+                        </tr>
+                    {%endif%}
+                </tbody>
+              </table>
+        
+          </main>
+            
+        <main class="col-12 laptop-view" style="margin-top:20px;">
+            <article class="card ">
+                <header class="card-header">
+                    <strong class="d-inline-block mr-3">Billing To</strong>
+                    <span>{{user.full_name}}</span>
+                </header>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Appointment #</th>
+                    <th scope="col">Billing Name</th>
+                    <th scope="col">Hospital</th>
+                    <th scope="col">₹ Price</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+         
+                        {% for order in appointments %}
+                        <tr>
+                            <th scope="row"> <a href="#">{{order.appointment_number}}</a> </th>
+                            <td>{{order.full_name}}</td>
+                            <td>{{order.hospital.hospital_name}}</td>
+                            
+                            <td>{{order.blood_category.category_price}}</td>
+                            <td>{{order.blood_category.category_name}}</td>
+                            <td>{{order.date}}, {{order.time}}</td>
+                        </tr>
+                        {% endfor %}
+                    
+                </tbody>
+              </table>
+        
+          </main>
+          <main class="col-lg-4 col-sm-12" style="margin-top:20px; float: right;">
+            <article class="card ">
+                <header class="card-header">
+                    <strong class="d-inline-block mr-3">Review</strong>
+                    <span></span>
+                </header>
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Sub-Total</th>
+                    <th scope="col">₹ {{sub_total}}</th>
+                   
+                  </tr>
+                </thead>
+                <tbody>
+         
+                    
+                        <tr>
+                            <th scope="row">Tax </th>
+                            <td>₹ {{tax}}</td>
+                            
+                        </tr>
+                        <tr>
+                            <th scope="row">Total </th>
+                            <td>₹ {{total}}</td>
+                            
+                        </tr>
+                  
+                    
+                </tbody>
+              </table>
+        
+          </main>
+        </article>
+    </div> <!-- row.// -->
+    </div>
+    <br><br>
+
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg" id="pdf" style="margin-bottom: 100px; display: none;">
+   
+
+    {% include 'includes/alerts.html' %}
+       <div class="container">
+           <div class="row">
+           
+               <div class="col-12 my-order-image">
+                   <img src="{%static 'base/images/or.PNG'%}" alt="" >
+               </div>
+        
+          
+           <main class="col-12">
+               <article class="card">
+               <header class="card-header" style="background: linear-gradient(to right, #28aae1, #0173bd);">
+                   <img src="{%static 'base/images/LogoPNG.png'%}" alt="" style="float: right; height: 6.5rem; width: 9rem;">
+   
+                   <strong class="d-inline-block mr-3" style="color:white">Medi-Book-India</strong><br>
+   
+                   <span style="color:white">Address: Delhi, Utar : Pradesh</span> <br>
+                   <span style="color:white">Phone: 6283550410</span> <br>
+                   <span style="color:white">Email: ashish@gmail.com</span> <br>
+               </header>
+               
+                <!-- table-responsive .end// -->
+               </article> <!-- order-group.// --> 
+           </main>
+   
+         
+               
+           <main class="col-12 laptop-view" style="margin-top:20px;">
+               <article class="card ">
+                   <header class="card-header">
+                       <strong class="d-inline-block mr-3">Billing To</strong>
+                       <span>{{user.full_name}}</span>
+                   </header>
+                   <table class="table table-bordered table-hover" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
+                    <thead>
+                      <tr style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">Appointment #</th>
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">Billing Name</th>
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">Hospital</th>
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">₹ Price</th>
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">Type</th>
+                        <th scope="col" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd; border-bottom: 1px solid #0173bd;">Date</th>
+                      </tr>
+                    </thead>
+                    <tbody style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
+                      <tr style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">
+                        {% for order in appointments %}
+                        <tr>
+                            <th scope="row" style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;"> <a href="#">{{order.appointment_number}}</a> </th>
+                            <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.full_name}}</td>
+                            <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.hospital.hospital_name}}</td>
+                            <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.blood_category.category_price}}</td>
+                            <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.blood_category.category_name}}</td>
+                            <td style="  border-left: 1px solid #0173bd; border-right: 1px solid #0173bd;">{{order.date}}, {{order.time}}</td>
+                        </tr>
+                        {% endfor %}
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+           
+             </main>
+             <main class="col-lg-4 col-sm-12" style="margin-top:20px; float: right;">
+               <article class="card ">
+                   <header class="card-header">
+                       <strong class="d-inline-block mr-3">Review</strong>
+                       <span></span>
+                   </header>
+               <table class="table table-hover">
+                   <thead>
+                     <tr>
+                       <th scope="col">Sub-Total</th>
+                       <th scope="col">₹ {{sub_total}}</th>
+                      
+                     </tr>
+                   </thead>
+                   <tbody>
+            
+                       
+                           <tr>
+                               <th scope="row">Tax </th>
+                               <td>₹ {{tax}}</td>
+                               
+                           </tr>
+                           <tr>
+                               <th scope="row">Total </th>
+                               <td>₹ {{total}}</td>
+                               
+                           </tr>
+                     
+                       
+                   </tbody>
+                 </table>
+           
+             </main>
+           </article>
+       </div> <!-- row.// -->
+       </div>
+       <br><br>
+   
+       
+       </section>
+       <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+
+{%endblock%}

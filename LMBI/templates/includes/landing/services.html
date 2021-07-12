@@ -1,0 +1,59 @@
+{% load static %}
+
+<!-- Start of .specialists-2 -->
+<section class="specialists-2" style="margin-top: 15%;">
+      
+    <div class="specialists-2__bg">
+        <div class="icon">
+            <img src="{% static 'base/images/png-shapes/ornament__left-bottom.png' %}">
+        </div>
+    </div>
+
+    <div class="container">
+
+        <h1 class="section-title section-title_60">Our <span>Services</span></h1>    
+        
+        <div class="specialists-2__card">
+            <div class="specialists-2__carousel owl-carousel owl-theme">
+
+                <div class="specialists-2__carousel-item">
+                    <div class="img">
+                        <img src="{% static 'base/images/our-services/lab-test.jpg' %}">
+                    </div>
+                    <div class="content" style="background-color: #10847e;">
+                        <h3 class="title" style="color:white;">Lab Tests</h3>
+                        <br><br><br><br>
+                        <a class="btn btn_pink" href="{% url 'btMain' %}">Book Now</a>  
+                    </div>
+                </div>
+
+                <div class="specialists-2__carousel-item">
+                    <div class="img">
+                        <img src="{% static 'base/images/our-services/medicine.jpg' %}">
+                    </div>
+                    <div class="content" style="background-color: #10847e;">
+                        <h3 class="title" style="color:white;">Order medicine</h3>
+                        <br><br><br><br>
+                        <a class="btn btn_pink" href="{% url 'store' %}">Order Now</a>  
+                    </div>
+                </div>
+
+                <div class="specialists-2__carousel-item">
+                    <div class="img">
+                        <img src="{% static 'base/images/our-services/heathcare.jpg' %}">
+                    </div>
+                    <div class="content" style="background-color: #10847e;">
+                        <h3 class="title" style="color:white;">Heathcare Products</h3>
+                        <br><br><br><br>
+                        <a class="btn btn_pink" href="{% url 'store' %}">Order Now</a>
+                    </div>
+                </div>
+
+                
+               
+            </div>
+        </div>
+
+    </div>
+</section>
+<!-- End of .specialists-2 -->

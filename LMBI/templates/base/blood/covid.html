@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+    <!-- Start of .header-bottom-4 -->
+    <header class="header-bottom-4">
+        <img src="{% static 'base/images/banner/banner6.jpg' %}">
+        <div class="header-bottom-4__bg">
+            <div class="icon">
+                <img src="{% static 'base/images/banner/banner-shape.png' %}">
+            </div>
+        </div>
+        <div class="container">
+            <h1 class="section-title">Blood <span>Tests</span></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'site-landing' %}">Home</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'btMain' %}">Blood Tests</a>
+                </li>
+                <li class="breadcrumb-item active">Covid</li>
+            </ol>
+        </div>
+    </header>
+    <!-- End of .header-bottom-4 -->
+
+    <!-- Start of departments-3 -->
+    <section class="departments-3 main-blog">
+
+
+        <div class="main-blog__bg">
+            <div class="icon">
+                <img src="{% static 'base/images/png-shapes/form-shape.png' %}">
+            </div>
+            <div class="icon">
+                <img src="{% static 'base/images/png-shapes/specialists__left-bottom-shape.png' %}">
+            </div>
+        </div>
+
+
+        <div class="container container_right-sidebar">
+            <div class="article">
+                <div class="departments-3__single">
+                    <h1 class="title">Covid19 Blood Test</h1>
+                    <div class="img">
+                        <iframe width="960" height="540" src="https://www.youtube.com/embed/-UdWguw90g4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <p class="text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                        ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                        cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed
+                        ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                        laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
+                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit
+                        aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
+                        voluptatem sequi nesciunt.
+                    </p>
+                    <ul class="lists">
+                        <h1 class="list-title">Preventive Dental Care:</h1>
+                        <li class="list-item"><i class="fa fa-check"></i>Oral Exam / Radiograph Study</li>
+                        <li class="list-item"><i class="fa fa-check"></i>Periodontal Scaling / Deep Cleanig</li>
+                        <li class="list-item"><i class="fa fa-check"></i>Dental care for pregnant patients cosists
+                            on evaluation and cleaning, mainly, <br>to educate patients on oral health care and
+                            pregnancy</li>
+                        <li class="list-item"><i class="fa fa-check"></i>Restorative Dentistry - Amalgan / Composite
+                            Fillings</li>
+                    </ul>
+                    <p class="text">
+                        Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
+                        velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                        quaerat voluptatem.
+                    </p>
+                    <div class="prices">
+                        <h1 class="title">Services and Prices:</h1>
+                        <div class="prices-block">
+                            <div class="item">
+                                <h1 class="title">Covid</h1>
+                                <ul class="lists">
+                                    <li class="list-item">
+                                        <span class="text">Method 1</span><span class="price">$1200</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="text">Method 2</span><span class="price">$100</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="sidebar">
+                <div class="departments-sidebar">
+                    <div class="departments-blog">
+                        <h1 class="title">Blood Test Categories</h1>
+                        <ul class="lists">
+                            <li class="list-item">
+                                <a href="{% url 'btMain' %}">
+                                    <!-- ^^class="active" -->
+                                    <span>Home</span>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="list-item">
+                                <a href="{% url 'btCovid' %}" class="active">
+                                    <span>Covid-19</span>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="list-item">
+                                <a href="{% url 'btCBC' %}">
+                                    <span>CBC</span>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                            <li class="list-item">
+                                <a href="{% url 'btCholestrol' %}">
+                                    <span>Cholestrol Test</span>
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="work-hours">
+                        <h1 class="title">Time Slots</h1>
+                        <ul class="lists">
+                            <li class="list-item">
+                                <span class="date">Mon-Fri</span>
+                                <span class="time">07:00 - 18:00</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="date">Saturday</span>
+                                <span class="time">07:00 - 14:00</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="date">Sunday</span>
+                                <span class="time">09:00 - 12:00</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="appointment">
+                        <h1 class="title">Book an appointment</h1>
+                        <form action="" class="appointment-form">
+                            <input type="text" placeholder="Text*">
+                            <input type="email" placeholder="Email*">
+                            <input type="tel" placeholder="Phone*">
+                            <input type="date" placeholder="Date">
+                            <textarea placeholder="Message"></textarea>
+                            <button type="submit" class="btn btn_pink">book now</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of departments-3 -->
+
+{% endblock content %}

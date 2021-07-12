@@ -1,0 +1,30 @@
+{% autoescape off %}
+
+Hi {{user.first_name}},
+
+YOUR ORDER HAS BEEN RECEIVED!!!!.
+
+
+ORDER NUMBER : {{order.order_number}}
+TRANSACTION ID: {{payment_id}}
+ORDER DATE: {{current_date}}
+
+                          ORDER BILL
+====================================================
+Description                    Qty              Total
+
+{%for i in orderproduct%}
+{{i.product.product_name}}        {{i.quantity}}      {{i.product_price}}
+
+{%endfor%}
+
+
+
+SUBTOTAL: ₹ {{total}}/-
+
+
+TAX: ₹ {{order.tax}}/-
+GRAND TOTAL: ₹ {{order.order_total}}/-
+
+
+{%endautoescape%}

@@ -1,0 +1,95 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<!-- Start of .header-bottom-4 -->
+<header class="header-bottom-4">
+    <img src="{%static 'base/images/banner/banner4.jpg'%}">
+    <div class="header-bottom-4__bg">
+        <div class="icon">
+            <img src="{%static 'base/images/banner/banner-shape.png'%}">
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="section-title">Proceed  <span>With</span></h1>
+        <br>
+
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'site-landing'%}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'store'%}">Store</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'cart'%}">Cart</a></li>
+            <li class="breadcrumb-item active">Checkout</li>
+        </ol>
+
+
+    </div>
+</header>
+
+    <!-- <div class="main-blog__bg">
+                <div class="icon">
+                    <img src="{%static 'base/images/png-shapes/form-shape.png'%}">
+                </div>
+                <div class="icon">
+                    <img src="{%static 'base/images/png-shapes/specialists__left-bottom-shape.png'%}">
+                </div>
+            </div> -->
+
+        <!-- Start of departments-3 -->
+        <section class="departments-3 main-blog">
+            
+
+            <div style="padding-top: 40px; padding-bottom: 0px;">
+                <center>
+                    
+                        <h1 class="title">
+                            Select the Address
+                            <br>
+                            {%if number == 1%}
+                                <a href="{%url 'place_order_details'%}" class="btn btn-primary">Proceed to Checkout</a></h1>
+                            {%else%}
+                                <a href="{%url 'buy_place_order_existed_address'%}" class="btn btn-primary">Proceed to Checkout</a>
+                            {%endif%}
+                        </h1>
+                </center>
+            </div>
+
+            <div class="container" style="padding-top: 0px;">
+                <div class="departments-3__items">
+                    {%for adr in address%}
+
+
+                        <div class="item-icon">
+
+                            <div class="img" style="max-height:50px">
+                                <!-- <img src="./images/jpg/departments-3.jpg"> -->
+                                <div class="icon" style="background-color:white;">
+                                    {%if adr.is_active%}
+                                        <button class="btn" style="background-color: green;">current</button>
+
+                                    {%else%}
+
+                                        <a href="{% url 'change_address' adr.id number %}" class="btn" style="background-color: #f22283; ">Select</a>
+
+                                    {%endif%}
+
+                                </div>
+                            </div>
+
+
+                            <h1 class="title">{{adr.country}}, {{adr.state}}</h1>
+                            <h3>{{adr.city}}</h3>
+                            <p class="text">{{adr.address_line_1}}, {{adr.address_line_2}}</p>
+                            <p class="text">Ph. {{adr.phone}}</p>
+
+                            <a href="{%url 'delete_address' adr.id number %}" class="btn" style="background-color: red;">Delete</a>
+                        </div>
+
+                        
+                    {%endfor%}
+
+                </div>
+            </div>
+        </section>
+        <!-- End of departments-3 -->
+
+{%endblock%}

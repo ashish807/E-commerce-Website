@@ -1,0 +1,92 @@
+{%extends 'base.html'%}
+
+
+{%block content%}
+
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg" style="margin-bottom: 50px;">
+
+ {% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row">
+        <nav class="col-4">
+    
+                {% include 'includes/dashboard_sidebar.html' %}
+        
+           
+        </nav>
+            <!--   SIDEBAR   -->
+           
+            <!--   SIDEBAR .//END   -->
+      
+        <main class="col-md-8" style="width: 700px;">
+            <article class="card">
+            <header class="card-header">
+                <strong class="d-inline-block mr-3">Add new Address</strong>
+                <span>{{user.full_name}}</span>
+            </header>
+            <div class="card-body">
+               
+                <div class="row"> 
+                    <div class="col-md-12">
+                        <form action="{%url 'add_address'%}" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                           
+                            <div class="form-group">
+                                <label for="streetAddress">Address Line 1</label>
+                                <input required type="text" class="form-control" id="streetAddress"  name="address_line_1">
+                            </div>
+                            <div class="form-group">
+                                <label for="streetAddress">Address Line 2</label>
+                                <input required type="text" class="form-control" id="streetAddress" name="address_line_2">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputTel">Phone Number </label>
+                                    <input required type="text" name="phone" class="form-control" id="inputTel">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="townCity">Town / City </label>
+                                    <input required type="text" name="city" class="form-control" id="townCity">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                
+                                <div class="col form-group">
+                                    <label for="">State</label>
+                                    <select name="state" class="form-control" required>
+                                        {%for state in states%} 
+                                        <option value="{{state.state}}">{{state.state}}</option>
+                                        {%endfor%}
+                                        
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="townCity">Country</label>
+                                    <input required type="text" name="country" class="form-control" id="townCity">
+                                </div>
+                            </div>
+                            
+                            <input type="submit" name="" value="Add" class="btn btn-primary">
+                            <button class='btn'>
+                                <a href="{%url 'checkout'%}">proceed to Checkout</a>
+                            </button>
+                            
+                        </form>
+                      
+                </div> <!-- row.// -->
+            </div> <!-- card-body .// -->
+             <!-- table-responsive .end// -->
+            </article> <!-- order-group.// --> 
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+    
+{%endblock%}

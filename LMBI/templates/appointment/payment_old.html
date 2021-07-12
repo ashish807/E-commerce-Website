@@ -1,0 +1,82 @@
+{%extends 'base.html'%}
+{%load static%}
+
+
+{%block content%}
+
+
+
+
+    <section class="section-content padding-y bg">
+    <div class="container">
+
+
+
+    <!-- ============================ COMPONENT 2 ================================= -->
+    <div class="row">
+
+        <main class="col-md-12">
+            <article class="card mb-6">
+
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Review Your Appointments</h4>
+                    <div class="row">
+                        {%for detail in appointment_details%}
+                        <div class="col-md-6">
+                        <!-- <figure class="itemside  mb-4"> -->
+                            <!-- <div class="aside"><img src="static 'base/images/blood_test.jpg'" class="border img-sm" style="width: 15rem; height: 15rem;"></div> -->
+                            <!-- <figcaption class="info"> -->
+                                <p> <b>{{detail.date}}</b> </p>
+                                <p> <b>{{detail.full_name}}</b> </p>
+                                <p> <b>Appointment Number:</b>  <br> {{detail.appointment_number}}</p>
+                                <p>Category: {{detail.blood_category.category_name}}</p>
+                                <span class="text-muted">Price {{detail.blood_category.category_price}} </span>
+                                <br><br><br>
+                                <a href="{%url 'remove_appointment' detail.appointment_number %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"> Remove</a>
+                                <hr style="height: 2px; background-color:#f22283 ;">
+
+                            <!-- </figcaption>
+                        </figure> -->
+                        </div> <!-- col.// -->
+                    
+                    {%endfor%}
+                    </div> <!-- row.// -->
+                </div> <!-- card-body.// -->
+            </article> <!-- card.// -->
+        </main> <!-- col.// -->
+
+
+        <aside class="col-md-6" style="padding-top: 30px;">
+            <div class="card">
+            <div class="card-body">
+            <dl class="dlist-align">
+                <dt>Total price:</dt>
+                <dd class="text-right">₹ {{sub_total}}</dd>
+            </dl>
+            <dl class="dlist-align">
+                <dt>Tax:</dt>
+                <dd class="text-right">₹ {{tax}}</dd>
+            </dl>
+            <dl class="dlist-align">
+                <dt>Grand Total: </dt>
+                <dd class="text-right text-dark b"><strong>₹ {{total}}</strong></dd>
+            </dl>
+            <hr>
+            <!-- <p class="text-center mb-3">
+                <img src="./images/misc/payments.png" height="26">
+            </p> -->
+            <a href="{%url 'payment_appoinment'%}" class="btn btn-primary btn-block"> Place Order </a>
+
+            </div> <!-- card-body.// -->
+            </div> <!-- card.// -->
+        </aside> <!-- col.// -->
+      </div> <!-- row.// -->
+
+    <!-- ============================ COMPONENT 2 END//  ================================= -->
+
+
+
+
+    </div> <!-- container .//  -->
+    </section>
+{%endblock%}

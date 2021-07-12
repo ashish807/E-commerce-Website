@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+ 
+    <!-- Start of .header-bottom-4 -->
+    <header class="header-bottom-4">
+        <img src="{% static 'base/images/banner/banner9.jpg' %}">
+        <div class="header-bottom-4__bg">
+            <div class="icon">
+                <img src="{% static 'base/images/banner/banner-shape.png' %}">
+            </div>
+        </div>
+        <div class="container">
+            <h1 class="section-title">Your <span>cart</span></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'site-landing' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Store</a></li>
+                <li class="breadcrumb-item active">Cart</li>
+            </ol>
+        </div>
+    </header> 
+    <!-- End of .header-bottom-4 -->
+
+
+
+
+   <!-- Start of .shop -->
+   <section class="shop main-blog">
+    <!-- <div class="main-blog__bg">
+        <div class="icon">
+            <img src="./images/png-shapes/form-shape.png">
+        </div>
+        <div class="icon">
+            <img src="./images/png-shapes/specialists__left-bottom-shape.png">
+        </div>
+    </div> -->
+
+
+
+    <div class="container">
+
+        {%if not cart_items%}
+        <div style="align-items: center;">
+            <center>
+                <h2 class="text-center">Your Shopping Cart is Empty</h2>
+                <div class="text-center" style="padding-inline-start: 20px;">
+                    <a href="{%url 'store'%}" class="btn btn-primary">Continue Shopping</a>
+                </div>
+            </center>
+        </div>
+        {%else%}
+
+        <div class="shop-cart">
+            <div class="responsive-table">
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th class="title">Product Name</th>
+                       
+                            <td class="title">Price</td>
+                            <td class="title">Quantity</td>
+                            <td class="title">Total</td>
+                            <td class="title">Remove</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            {%for cart_item in cart_items%}
+                                <tr>
+                                    <th>
+                                        <div class="img">
+                                            <img src="{{cart_item.product.image.url}}">
+                                        </div>
+                                        <p class="text">
+                                            {{cart_item.product.product_name}}
+                                            <br>
+                                            <h7 style="font-size:15px; align-self: left;">
+                                                {%if cart_item.variation.all%}
+                                                    {%for item in cart_item.variation.all%}
+                                                        {{item.variation_category | lower }} : {{item.variation_value | capfirst}}
+                                                        <br>
+                                                    {%endfor%}
+                                                {%endif%}
+                                            </h7>      
+                                            
+                                        </p>
+                                    </th>
+                                 
+                                    <td class="price">₹<span>{{cart_item.product.price}}</span></td>
+
+
+                                    <td class="count-add">
+                                        <div class="count-product">
+                                            <a href="{%url 'remove_cart' cart_item.product.id cart_item.id%}" class="btn" type="button" id="button-minus" style="color:#F22283">
+                                                <i class="fa fa-minus control minus"></i>
+                                            </a>
+    
+                                            <span class="value">{{cart_item.quantity}}</span>
+    
+                                            <form action="{%url 'add_cart' cart_item.product.id%}" method="POST">
+                                                        {%csrf_token%}
+                                                        {%for item in cart_item.variation.all %}
+                                                            <input type="hidden" name = "{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                                                        {%endfor%}
+                                                        
+                                                        <button class="btn" type="submit" id="button-plus" style="color:#F22283">
+                                                            <i class="fa fa-plus"></i>
+                                                        </button>
+                                                
+                                                    </form>
+                                         
+                                        </div>
+                                    </td>
+
+                                    <td class="total">₹<span>{{cart_item.sub_total}}</span></td>
+
+
+                                    <td>
+                                    <a href="{%url 'remove_cart_item' cart_item.product.id cart_item.id%}" onclick="return confirm('Are you sure you want to delete?')" style="color:red">
+                                        <i class="fa fa-remove"></i>
+                                    </a>
+
+                                </td>
+                                </tr>
+                            {%endfor%}
+                        <!-- <tr>
+                            <th>
+                                <div class="img">
+                                    <img src="./images/jpg/single-cart.jpg">
+                                </div>
+                                <p class="text">Anti Computer Fashionable Lucien</p>
+                            </th>
+                            <td class="price">$<span>29.99</span></td>
+                            <td class="count-add">
+                                <div class="count-product">
+                                    <span class="control minus">-</span>
+                                    <span class="value">0</span>
+                                    <span class="control plus">+</span>
+                                </div>
+                            </td>
+                            <td class="total">$<span>29.98</span></td>
+                            <td>
+                                <i class="fa fa-remove"></i>
+                            </td>
+                        </tr> -->
+
+                    </tbody>
+
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <a href="{%url 'store' %}">Add More Items</a>
+                            </td>
+                            {%if user.is_authenticated%}
+                                <td colspan="3">
+                                    <a href="{%url 'checkout' %}">Checkout</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- <div class="cupon">
+                <h1 class="title">Coupon Discount</h1>
+                <form>
+                    <input type="text" placeholder="Coupon code">
+                    <button>apply coupon</button>
+                </form>
+            </div> -->
+            <div class="check">
+                <div class="subtotal">
+                    <span>Subtotal</span>
+                    <span>₹ <span>{{total}}</span>
+                </div>
+                
+                <div class="subtotal">
+                    <span>Tax</span>
+                    <span>₹ <span>{{tax}}</span>
+                </div>
+
+
+                <div class="subtotal">
+                    <span>Total</span>
+                    <span>₹ <span>{{grand_total}}</span></span>
+                </div>
+              
+                
+                {%if user.is_authenticated%}
+                    <a href="{%url 'checkout' %}">Proceed to Checkout</a>
+                {%else%}
+                    <a href="{%url 'checkout' %}">Login</a>
+                
+                    <a href="{%url 'checkout_guest' %}" style="margin-top:20px;">Proceed as Guest</a>
+                {%endif%}
+
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+</section>
+<!-- End of .shop -->
+
+{% endblock content %}

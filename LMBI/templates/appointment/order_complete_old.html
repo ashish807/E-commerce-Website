@@ -1,0 +1,116 @@
+{%extends 'base.html'%}
+
+{%load static%}
+
+
+
+{%block content%}
+
+
+<center style="margin-top: 100px; padding-bottom: 20px;">
+    <button onclick="saveDiv()" class="btn btn-primary">Save Bill</button>
+</center>
+
+<div class="invoice-box" id="pdf">
+    <table cellpadding="0" cellspacing="0" >
+        <tr class="top">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="{%static 'base/images/LogoPNG.png'%}" style="width: 100%; max-width: 200px" />
+                        </td>
+                        <td>
+                            <center>
+                                <h4>{{user.full_name}} <br> {{user.email}}</h4>
+                            </center>
+                        </td>
+                        
+                        <td style="text-align: right;" class="text-muted">
+                                Invoice <br />
+                                Created: {{current_date}}<br />
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="information">
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            Ad Line 1<br />
+                            Ad Line 2<br />
+                            Delhi, India 12345
+                        </td>
+
+                        
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading" >
+            <td>User Details</td>
+            <td style="margin-left: 0px;">Hospital Details</td>
+             <td>Price &nbsp&nbsp&nbsp&nbsp&nbsp</td>
+            
+            <td>Type</td>
+            <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbspDate</td>
+        </tr>
+      {%for i in appointments%}
+        <tr class="item">
+            <td>{{i.full_name}} <br> {{i.get_full_address}} <br>
+            {{i.email}} <br>
+            {{i.phone}}</td>
+            <td>{{i.hospital.hospital_name}}</td>
+            <td>₹ {{i.blood_category.category_price}} &nbsp&nbsp&nbsp&nbsp&nbsp</td>
+            <td>{{i.blood_category.category_name}}</td>
+            <td>{{i.date}}</td>
+        </tr>
+      {%endfor%}
+
+    
+    
+</table>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col"></th>
+   
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">Sub-total</th>
+        <td>₹{{sub_total}}</td>
+       
+      </tr>
+      <tr>
+        <th scope="row">Tax</th>
+        <td>₹{{tax}}</td>
+        
+      </tr>
+      <tr>
+        <th scope="row">Total</th>
+        <td>₹{{total}}</td>
+       
+      </tr>
+    </tbody>
+  </table>
+    </table>
+    <!-- <center style="margin-top: 20px; margin-bottom: 50px;"> <h4>
+        Sub-Total: {{sub_total}} <br>
+        Tax:       {{tax}}
+        <br>
+        Total:     {{total}}
+    </h4></center> -->
+</div>
+
+
+
+
+
+{%endblock%}

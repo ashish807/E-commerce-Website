@@ -1,0 +1,19 @@
+{% load static %}
+
+<div class="searchBox">
+    <span class="searchBox-close">&times;</span>
+    <form action="{%url 'search'%}" class="search" method="GET">
+
+        <input type="search" placeholder="Write Search Keyword & Press Enter" name="keyword">
+        <button type="submit">
+
+
+            <svg width="24.71" height="25.687" viewBox="0 0 24.71 24.687">
+                <path id="search.svg" class="cls-2"
+                    d="M1144.4,440.468l8.19,8.178-3.47,3.467-8.19-8.178,1.18-1.177-1.38-1.385a7.878,7.878,0,1,1,1.11-1.11l1.38,1.383Zm-2.36-5.172a6.29,6.29,0,1,0-6.29,6.282A6.293,6.293,0,0,0,1142.04,435.3Zm8.33,13.35-3.61-3.6-1.24,1.245,3.6,3.6Zm-5.97-3.465,1.25-1.246-1.25-1.245-1.24,1.245Zm-11.79-9.885h-1.57a4.715,4.715,0,0,1,4.71-4.712v1.57A3.146,3.146,0,0,0,1132.61,435.3Z"
+                    transform="translate(-1127.88 -427.438)" />
+            </svg>
+            search
+        </button>
+    </form>
+</div>

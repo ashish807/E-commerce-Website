@@ -1,0 +1,81 @@
+{% load static %}
+
+<div class="popup-form">
+    <div class="inner-block">
+        <span class="popup-form-close" id="popup-form-close">&times;</span>
+        <div class="img">
+            <img src="{%static 'base/images/appoinment.jpg'%}" > 
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class ="card">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Book An Appointment</h4>
+                        <form method="POST" action="{% url 'appointments' %}"> 
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" name="first_name" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" name="email" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Phone number</label>
+                                    <input type="text" name="phone" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">Address Line 1</label>
+                                    <input type="text" name="address_line_1" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Address Line 2</label>
+                                    <input type="text" name="address_line_2" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">City</label>
+                                    <input type="text" name="city" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">State</label>
+                                    <input type="text" name="state" class="form-control" required>
+                                </div>
+                                <!-- <div class="col form-group">
+                                    <label for="">Country</label>
+                                    <input type="text" name="country" class="form-control" required>
+                                </div> -->
+                                
+                            </div>
+                            {%if user.is_authenticated%}
+                                <button type="submit" class="btn btn-block" style="background-color: #f22283;"> Book Now </button>
+                            {%else%}
+                                <a href="{%url 'login'%}" >Login First</button>
+                            {%endif%}
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+       
+    </div>
+</div>

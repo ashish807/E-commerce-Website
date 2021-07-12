@@ -1,0 +1,226 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block content%}
+
+    <!-- Start of .header-bottom-4 -->
+    <header class="header-bottom-4">
+        <img src="{% static 'base/images/banner/banner9.jpg' %}">
+        <div class="header-bottom-4__bg">
+            <div class="icon">
+                <img src="{% static 'base/images/banner/banner-shape.png' %}">
+            </div>
+        </div>
+        <div class="container">
+            <h1 class="section-title">Review<span>Order</span></h1>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'site-landing' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'store' %}">Store</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cart' %}">Cart</a></li>
+                <li class="breadcrumb-item active">Review Order</li>
+            </ol>
+        </div>
+    </header>
+    <!-- End of .header-bottom-4 -->
+
+    <section class="section-content padding-y bg" style="margin-top: 50px; margin-bottom: 50px;">
+        <div class="container">
+
+        <!-- ============================ COMPONENT 1 ================================= -->
+       <!-- <h4 class="text-center mb-10">Review Your Product and make Payment</h4> -->
+        <div class="row">
+            <aside class="col-lg-8">
+
+
+                <div class="card">
+                    <div class="card-header">
+                      Billing Address
+                    </div>
+
+                    <div class="card-body">                    
+                      <p class="card-text mb-0"><b>Name : </b>{{order.get_full_name}}</p>
+                      <p class="card-text mb-0"><b>Address : </b>{{order.get_full_address}}</p>
+                      <p class="card-text mb-0"> <b>City : </b>{{order.city}} </p>
+                      <p class="card-text mb-0"> <b>State : </b>{{order.state.state}} </p>
+                      <p class="card-text mb-0"><b>Country : </b>{{order.country}}</p>
+                      <p class="card-text mb-0"><b>Email : </b>{{order.email}}</p>
+                      <p class="card-text mb-0"><b>Phone : </b>{{order.phone}}</p>
+                      {%if order.order_note%}
+                        <b>Order Note : </b> {{order.order_note}}
+                      {%endif%}
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      Payment Methods
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text mb-0"><b>PayPal</b></p>
+                    </div>
+                  </div>
+                  
+                  <br>
+
+                  <div class="card">
+                    <div class="card-header">
+                      Review Order
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless table-shopping-cart">
+                            <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                            <th scope="col">Product</th>
+                            <th scope="col" width="120">Quantity</th>
+                            <th scope="col" width="120">Price</th>
+                            
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% if place_order%}
+                            {%for cart_item in cart_items%}
+                                <tr>
+                                    <td>
+                                        <figure class="itemside align-items-center">
+                                            <div class="aside"><img src="{{cart_item.product.image.url}}" class="img-sm" style="width: 8rem;"></div>
+                                            <figcaption class="info">
+                                                <a href="#" class="title text-dark">{{cart_item.product.product_name}}</a>
+                                                <p class="text-muted small">
+                                                {%if cart_item.variation.all%}
+                                                    {%for item in cart_item.variation.all%}
+                                                        {{item.variation_category | lower }} : {{item.variation_value | capfirst}} <br>
+                                                    {%endfor%}
+                                                {%endif%}
+                                                </p>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                    <td> 
+                                        <!-- col.// -->
+                                                    <div class="col"> 
+                                                        <div class="input-group input-spinner">
+                                                            <div class="input-group-prepend">
+                                                            </div>
+                                                            <input type="text" class="form-control"  value="{{cart_item.quantity}}">
+                                                            <div class="input-group-append">
+                                                           
+                                                                    <input type="hidden" name = "{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                                                          
+                    
+                                                            
+                                                            </div>
+                                                        </div> <!-- input-group.// -->
+                                                    </div> <!-- col.// -->
+                                    </td>
+                                    <td> 
+                                        <div class="price-wrap"> 
+                                            <var class="price">${{cart_item.sub_total}}</var>
+                                            <br> 
+                                            <small class="text-muted"> ${{cart_item.product.price}} each </small> 
+                                        </div> <!-- price-wrap .// -->
+                                    </td>
+                                    <td class="text-right"> 
+                                    </td>
+                                </tr>
+                            {%endfor%}
+                            {%else%}
+                            <tr>
+                                <td>
+                                    <figure class="itemside align-items-center">
+                                        <div class="aside"><img src="{{cart_item.product.image.url}}" class="img-sm" style="width: 8rem;"></div>
+                                        <figcaption class="info">
+                                            <a href="#" class="title text-dark">{{cart_item.product.product_name}}</a>
+                                            <p class="text-muted small">
+                                            {%if cart_item.variation.all%}
+                                                {%for item in cart_item.variation.all%}
+                                                    {{item.variation_category | lower }} : {{item.variation_value | capfirst}} <br>
+                                                {%endfor%}
+                                            {%endif%}
+                                            </p>
+                                        </figcaption>
+                                    </figure>
+                                </td>
+                                <td> 
+                                    <!-- col.// -->
+                                                <div class="col"> 
+                                                    <div class="input-group input-spinner">
+                                                        <div class="input-group-prepend">
+                                                        </div>
+                                                        <input type="text" class="form-control"  value="1">
+                                                        <div class="input-group-append">
+                                                       
+                                                                <input type="hidden" name = "{{item.variation_category | lower}}" value="{{item.variation_value | capfirst}}">
+                                                      
+                
+                                                        
+                                                        </div>
+                                                    </div> <!-- input-group.// -->
+                                                </div> <!-- col.// -->
+                                </td>
+                                <td> 
+                                    <div class="price-wrap"> 
+                                        <var class="price">${{cart_item.product.price}}</var>
+                                        <br> 
+                                        <small class="text-muted"> ${{cart_item.product.price}} each </small> 
+                                    </div> <!-- price-wrap .// -->
+                                </td>
+                                <td class="text-right"> 
+                                </td>
+                            </tr>
+                            {%endif%}
+                            </tbody>
+                            </table>
+                      <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                    </div>
+                  </div>
+
+            </aside> <!-- col.// -->
+
+            
+            <aside class="col-lg-4">
+               
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <p><b>Total price : </b>{{total}}</p>
+                            <!-- <dd class="text-right"></dd> -->
+                        </dl>
+                        <dl class="dlist-align">
+                            <p><b>Tax : </b>{{tax}}</p>
+                            <!-- <dt>Tax:</dt>
+                            <dd class="text-right">{{tax}}</dd> -->
+                        </dl>
+                        <dl class="dlist-align">
+                            <p><b>Total : </b>{{grand_total}}</p>
+                            <!-- <dt>Total:</dt>
+                            <dd class="text-right text-dark b">{{grand_total}}</dd> -->
+                        </dl>
+
+                        <hr>
+                        
+                        <p class="text-center mb-3">
+                            <img src="{%static './images/misc/payments.png'%}" height="26">
+                        </p>
+                        {% if place_order%}
+                            <a href="{%url 'makePayment' order.order_number order.email%}" class="btn btn-primary btn-block"> Make Payement </a>
+                        {%else%}
+                            <a href="{%url 'buy_makePayment' order.order_number order.email%}" class="btn btn-primary btn-block"> Make Payement </a>
+                        {%endif%}
+                    </div>
+                </div>
+
+            </aside> <!-- col.// -->
+
+
+        </div> <!-- row.// -->
+
+        <!-- ============================ COMPONENT 1 END .// ================================= -->
+
+        </div> <!-- container .//  -->
+        </section>
+        <!-- ========================= SECTION CONTENT END// ========================= -->  
+
+{%endblock%}

@@ -1,0 +1,130 @@
+{%extends 'base.html'%}
+
+{%load static%}
+
+{%block content%}
+<div class="container" style="margin-bottom: 100px; margin-top: 100px;">
+    <div class="row">
+        <div class="img col-md-6 col-sm-12">
+            <img src="{%static 'base/images/appointment.jpg'%}" style="width: 600px;"> 
+        </div>
+     
+                <div class ="card col-md-6 col-sm-12 appoint">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4">Book An Appointment</h4>
+                        <form action="{%url 'appointments'%}" method="POST">
+                            {% csrf_token %}
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" name="first_name" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" name="email" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Phone number</label>
+                                    <input type="text" name="phone" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">Address Line 1</label>
+                                    <input type="text" name="address_line_1" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">Address Line 2</label>
+                                    <input type="text" name="address_line_2" class="form-control" required>
+                                </div>
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label for="">City</label>
+                                    <input type="text" name="city" class="form-control" required>
+                                </div>
+                                <div class="col form-group">
+                                    <label for="">State</label>
+                                    <select name="state" class="form-control" required>
+                                        {%for state in state_names%} 
+                                        <option value="{{state.state}}">{{state.state}}</option>
+                                        {%endfor%}
+                                        
+                                    </select>
+                                </div>
+                                
+                                
+                            </div>
+                            <div class="form-row">
+                            <div class="col form-group">
+                                <label for="">Test Type</label><br>
+                                <!-- <select name="blood_category" class="form-control" required> -->
+                                    {%for cat in blood_cat%} 
+                                    <input type="checkbox" value="{{cat.category_name}}" name="{{cat.category_name}}">{{cat.category_name}}</option>
+                                    {%endfor%}
+                                    
+                                <!-- </select> -->
+                            </div>
+                            </div>
+                            <div class="form-row">
+                               
+
+                                <div class="col form-group">
+                                    <label for="">Hospital</label>
+                                    <select name="hospital" class="form-control" required>
+                                        {%for hos in hospitals%} 
+                                        <option value="{{hos.hospital_name}}">{{hos.hospital_name}}</option>
+                                        {%endfor%}
+                                        
+                                    </select>
+                                </div>
+                                
+                              
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <div class="col form-group">
+                                        <label for="">Date</label>
+                                        <!-- <input type="text" name="time_slot" class="form-control" required placeholder="DD/MM/YY"> -->
+                                        <input class="form-control" name='date' type="date" placeholder="Date">
+                                    </div>
+                                </div>
+                                <div class="col form-group">
+                                    <div class="col form-group">
+                                        <label for="">Time Slot</label>
+                                        <!-- <input type="text" name="time_slot" class="form-control" required placeholder="DD/MM/YY"> -->
+                                        <input class="form-control" name='time' type="time" placeholder="time">
+                                    </div>
+                                </div>
+
+                            </div>
+                           
+                            {%if user.is_authenticated%}
+                                <button type="submit" class="btn btn-block" style="background-color: #f22283;"> Book Now </button>
+                            {%else%}
+                                <a href="{%url 'login'%}" >Please Login</button>
+                            {%endif%}
+                        </form>
+    
+    
+                    </div>
+    
+                </div>
+    
+           
+    </div>
+</div>
+
+  
+
+{%endblock%}

@@ -1,0 +1,226 @@
+{%load static%}
+
+<!-- Start of .header-middle -->
+ <header class="header-middle header-middle_white-transparent" style="margin-bottom: 80px;">
+    <div class="container">
+
+        <!-- hidden navbar for mobiles -->
+        <div class="navbar-logo">
+            <a href="index.html">
+                <svg id="logo-white.svg" width="116.09" height="39" viewBox="0 0 116.09 39">
+                    <path class="cls-1"
+                        d="M1045.89,144.338l5.7-9.565,5.87,8.679,5.87-8.856,5.87,9.742,7.83,0.176s-3.69,9.734-19.57,19.485c0,0-9.61-5.766-14.95-12.575h4.81a69.279,69.279,0,0,0,10.14,8.146s8.41-5.393,12.81-11.336h-3.38l-3.74-6.376-5.69,8.5-5.7-8.5-3.73,6.376h-8.01s-9.48-12.717,2.67-21.43c7.78-4.687,14.59,1.239,14.59,1.239s6.41-5.146,13.88-1.948,7.96,12.345,6.94,15.231h-3.74s2.4-9.573-5.87-12.22a10.836,10.836,0,0,0-10.85,3.365s-4.05-4.127-9.26-3.72-11.16,5.969-6.58,15.587h4.09Z"
+                        transform="translate(-1036.5 -125)" />
+                    <path id="IBNSINO" class="cls-3"
+                        d="M1087.12,153.436h3.08V133.848h-3.08v19.588Zm9.96-19.588h-4.64v19.588h4.84c3.08,0,4.67-1.623,4.67-4.645V147.2c0-2.071-.64-3.526-2.29-4.17V142.97c1.37-.643,1.99-1.9,1.99-3.917v-0.7C1101.65,135.331,1100.27,133.848,1097.08,133.848Zm-0.19,10.773c1.4,0,1.98.56,1.98,2.379v1.707c0,1.455-.55,1.931-1.59,1.931h-1.76v-6.017h1.37Zm0.11-7.975c1.09,0,1.57.616,1.57,2.015v1.091c0,1.567-.7,2.071-1.85,2.071h-1.2v-5.177H1097Zm13.38,16.79h3.16V133.848h-2.74v11.725h-0.05l-3.11-11.725h-3.86v19.588h2.77V139.249h0.05Z"
+                        transform="translate(-1036.5 -125)" />
+                    <path id="IBNSINO_copy" data-name="IBNSINO copy" class="cls-1"
+                        d="M1115.37,138.549c0,2.239.81,3.862,3.39,6.128,2.01,1.763,2.63,2.827,2.63,4.254,0,1.4-.62,1.9-1.6,1.9s-1.59-.5-1.59-1.9v-1.4h-2.91v1.2c0,3.134,1.56,4.925,4.59,4.925s4.58-1.791,4.58-4.925c0-2.239-.81-3.862-3.38-6.128-2.02-1.763-2.63-2.827-2.63-4.254,0-1.4.56-1.93,1.54-1.93s1.54,0.531,1.54,1.93v0.812h2.91v-0.616c0-3.134-1.54-4.925-4.54-4.925S1115.37,135.415,1115.37,138.549Zm10.86,14.887h3.08V133.848h-3.08v19.588Zm11.9,0h3.16V133.848h-2.74v11.725h-0.06l-3.1-11.725h-3.86v19.588h2.77V139.249h0.05Zm8.21-15.083c0-1.4.61-1.93,1.59-1.93s1.6,0.531,1.6,1.93v10.578c0,1.4-.62,1.93-1.6,1.93s-1.59-.531-1.59-1.93V138.353Zm-3.08,10.382c0,3.134,1.65,4.925,4.67,4.925s4.67-1.791,4.67-4.925V138.549c0-3.134-1.65-4.925-4.67-4.925s-4.67,1.791-4.67,4.925v10.186Z"
+                        transform="translate(-1036.5 -125)" />
+                </svg>
+            </a>
+        </div>
+        <div class="navbar-icon">
+            <span></span>
+        </div>
+        <!-- End of hidden navbar for mobiles -->
+
+        <!-- navbar__menu-link clicked jquery -> event.preventDefoult() -->
+        <div class="navbar">
+
+            <ul class="navbar__menu">
+
+
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'site-about' %}">About Us</a>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="{% url 'store' %}">Store</a>
+                    <ul class="navbar__submenu">
+                        
+                        {%for category in links%}
+
+                        <li class="navbar__submenu-item">
+                            <a href="{{category.get_url}}" class="navbar__submenu-link">{{category.category_name}}</a>
+                        </li>
+                        {%endfor%}
+
+                        <!-- <li class="navbar__submenu-item">
+                            <a href="#" class="navbar__submenu-link">Doctor Single page
+                                right</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/doctors-single_left.html" class="navbar__submenu-link">Doctor Single page
+                                left</a>
+                        </li> -->
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">ENTER</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/departments-3_column.html" class="navbar__submenu-link">Departments 3
+                                columns</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/departments-3_column_icon.html" class="navbar__submenu-link">Departments 3
+                                columns icon</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/departments-1_column.html" class="navbar__submenu-link">Departments 1
+                                column</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">MORE</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/shop.html" class="navbar__submenu-link">Shop</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/shop-product_detail.html" class="navbar__submenu-link">Shop Product
+                                Detail</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/shop-cart.html" class="navbar__submenu-link">Shop Cart</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/shop-checkout.html" class="navbar__submenu-link">Shop Checkout</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">LINKS</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/about.html" class="navbar__submenu-link">About Us</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/faqs.html" class="navbar__submenu-link">FAQs</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">OVER</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-grid.html" class="navbar__submenu-link">Blog-Grid</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-grid_left.html" class="navbar__submenu-link">Grid left sidebar</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-grid_right.html" class="navbar__submenu-link">Grid right sidebar</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-grid_1_column_right.html" class="navbar__submenu-link">Grid 1 column
+                                right sidebar</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-grid_1_column_left.html" class="navbar__submenu-link">Grid 1 column
+                                left sidebar</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-details_left.html" class="navbar__submenu-link">Details left
+                                sidebar</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/blog-details_right.html" class="navbar__submenu-link">Details right
+                                sidebar</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="navbar__menu-item">
+                    <a class="navbar__menu-link" href="#">HERE</a>
+                    <ul class="navbar__submenu">
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/contact.html" class="navbar__submenu-link">Contact</a>
+                        </li>
+
+                        <li class="navbar__submenu-item">
+                            <a href="./Pages/contact-2.html" class="navbar__submenu-link">Contact-2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="navbar__right">
+
+                <div class="navbar__bag">
+                    <svg width="25.16" height="26" viewBox="0 0 25.16 25.125">
+                        <path id="bag.svg" class="cls-3"
+                            d="M1049.15,437.286h-6.46l0.94,3.736a0.794,0.794,0,0,1-.58.951,0.677,0.677,0,0,1-.19.024,0.786,0.786,0,0,1-.76-0.6l-1.03-4.116h-8.99l-1.03,4.116a0.786,0.786,0,0,1-.76.6,0.677,0.677,0,0,1-.19-0.024,0.78,0.78,0,0,1-.57-0.951l0.93-3.736H1024v-1.569h6.85l1.82-7.258a0.784,0.784,0,1,1,1.52.382l-1.72,6.876h8.21l-1.72-6.876a0.784,0.784,0,1,1,1.52-.382l1.82,7.258h6.85v1.569Zm-22.01,3.089,1.48,11.043h15.91l1.48-11.043v-1.518h1.57l-0.01,1.674-1.66,12.458h-18.67l-1.67-12.562v-1.57h1.57v1.518Z"
+                            transform="translate(-1024 -427.875)" /> </svg>
+                    <span class="navbar__bag-count">{{ cart_count }}</span>
+                    <span class="navbar__bag-price">Rs.  {{ total }}</span>
+
+                    <!-- checkBox -->
+                    <div class="checkBox">
+                        <ul class="products">
+                            <li class="products-item">
+                                <div class="img">
+                                    <img src="{% static 'base/images/jpg/shop-arrivales3.jpg' %}">
+                                </div>
+                                <div class="text">
+                                    <h1 class="name">Sunglasses</h1>
+                                    <p class="price"><span>25.00</span>$</p>
+                                </div>
+                                <i class="fa fa-remove"></i>
+                            </li>
+                            <li class="products-item">
+                                <div class="img">
+                                    <img src="{% static 'base/images/jpg/shop-arrivales4.jpg' %}">
+                                </div>
+                                <div class="text">
+                                    <h1 class="name">Vitamin D-3</h1>
+                                    <p class="price"><span>25.00</span>$</p>
+                                </div>
+                                <i class="fa fa-remove"></i>
+                            </li>
+                        </ul>
+                        <div class="products-total">
+                            <span>Total</span>
+                            <span><span>36.89</span>$</span>
+                        </div>
+                        <a href="shop-checkout.html" class="btn btn_pink">Check out</a>
+                    </div>
+                </div>
+
+
+                <div class="navbar__search searchBox-open">
+                    <svg width="24.71" height="25.687" viewBox="0 0 24.71 24.687">
+                        <path id="search.svg" class="cls-3"
+                            d="M1144.4,440.468l8.19,8.178-3.47,3.467-8.19-8.178,1.18-1.177-1.38-1.385a7.878,7.878,0,1,1,1.11-1.11l1.38,1.383Zm-2.36-5.172a6.29,6.29,0,1,0-6.29,6.282A6.293,6.293,0,0,0,1142.04,435.3Zm8.33,13.35-3.61-3.6-1.24,1.245,3.6,3.6Zm-5.97-3.465,1.25-1.246-1.25-1.245-1.24,1.245Zm-11.79-9.885h-1.57a4.715,4.715,0,0,1,4.71-4.712v1.57A3.146,3.146,0,0,0,1132.61,435.3Z"
+                            transform="translate(-1127.88 -427.438)" /></svg>
+                </div>
+
+                <a href="#" class="btn  btn_pink" id="popup-form-open">MAKE AN APPOINTMENT</a>
+
+            </div>
+        </div>
+
+    </div>
+</header>
+<!-- End of .header-middle -->

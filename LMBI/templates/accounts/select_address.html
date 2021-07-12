@@ -1,0 +1,85 @@
+{%extends 'base.html'%}
+
+{%load static%}
+{%block content%}
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg" style="margin-bottom: 15px; margin-left: 20px;">
+
+    {% include 'includes/alerts.html' %}
+    <div class="contaner">
+        <div class="row">
+            <nav class="col-3">
+
+                {% include 'includes/dashboard_sidebar.html' %}
+
+
+            </nav>
+            <div class="col-9">
+                <img src="{%static 'base/images/address.jpg'%}" alt="" style="height: 75%; width: 75%">
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+</section>
+<section class="emergency-call" style="margin-bottom: 100px;">
+    <div class="container">
+        <div class="emergency-call__items">
+            {% if address %}
+                {%for adr in address%}
+                <div class="emergency-call__item">
+                    <div class="icon">
+                        <h1 style="color:#f22283;"><i class="fa fa-map-marker"></i></h1>
+                    </div>
+                    <div class="content">
+                        
+                            <h1>{{adr.state}}, {{adr.country}}</h1>
+                            <h3>{{adr.city}}</h3>
+                            <p>{{adr.address_line_1}}, <br> {{adr.address_line_2}}</p>
+                            <p>{{adr.phone}}</p>
+                            <p>{{adr.id}}</p>
+
+                            {%if adr.is_active%}
+                                <button  class="btn" style="background-color: green;">current</button>
+                                
+                            {%else%}
+                                
+                                <a href="{% url 'change_address' adr.id %}" class="btn" style="background-color: #f22283; ">ADD</button>
+
+                            {%endif%}
+                            <a href="#" class="btn" style="background-color: red; margin-left: 20px;"><i class="fa fa-remove"></i></a>
+                            
+                    
+                        <hr style="height: 3px; color: antiquewhite;">
+
+                        
+                    </div>
+                
+                </div>
+                {%endfor%}
+                {%else%}
+                    <div class="emergency-call__item">
+                        <div class="icon">
+                            <h1 style="color:#f22283;"><i class="fa fa-map-marker"></i></h1>
+                        </div>
+                        <div class="content" >
+                            <a href="{%url 'add_address'%}" class="btn" style="background-color: #f22283;margin-top: 18px;">ADD ADDRESS</a>
+
+                        </div>
+                    
+                    </div>
+                
+            {%endif%}
+
+
+
+        </div>
+    </div>
+</section>
+<!-- End of .emergency-call -->
+
+{%endblock%}

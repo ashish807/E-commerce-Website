@@ -1,0 +1,33 @@
+{% autoescape off %}
+
+{%if admin%}
+Hello Medi Book India,
+    
+You got an appointment!!!!.
+Name: {{user.first_name}} {{user.last_name}}
+{%for i in appointments%}
+APPOINTMENT NUMBER : {{i.appointment_number}}
+CATEGOREY: {{i.blood_category.category_name}}
+PRICE: {{i.blood_category.category_price}}
+Hospital: {{i.hospital.hospital_name}}
+{%endfor%}
+
+TAX: {{tax}}
+TOTAL: {{total}} 
+{%else%}
+
+Hi {{user.first_name}},
+
+YOUR ORDER HAS BEEN RECEIVED!!!!.
+{%for i in appointments%}
+APPOINTMENT NUMBER : {{i.appointment_number}}
+CATEGOREY: {{i.blood_category.category_name}}
+PRICE: {{i.blood_category.category_price}}
+Hospital: {{i.hospital.hospital_name}}
+{%endfor%}
+
+TAX: {{tax}}
+TOTAL: {{total}}
+{%endif%}
+
+{%endautoescape%}

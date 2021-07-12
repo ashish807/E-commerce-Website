@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Home Pages</title>
+    
+    <link rel="icon" href="{% static 'base/images/LogoPNG.png' %}">
+
+    <!-- wow animation style -->
+    <link rel="stylesheet" href="{% static 'base/css/animate.css' %}">
+   
+    <link rel="stylesheet" href="{% static 'base/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/owl.theme.default.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'base/css/main.css' %}">
+    <script src="extensions/mobile/bootstrap-table-mobile.js"></script>
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+    <style>
+        @media (min-width:827px)
+        {
+            .appoint{
+                width: 700px;
+            }
+        }
+    
+
+        
+
+        
+    </style>
+   
+    
+</head>
+
+<body>
+
+    <div class="page">
+
+
+        <!-- Start of .header-top -->
+        {%include 'includes/landing/headerInfoBar.html'%} 
+        <!-- End of .header-top --> 
+
+        <!-- Start of .header-middle -->
+        {%include 'includes/landing/dropdownHeader.html'%} 
+        <!-- End of .header-middle -->
+
+
+        {% include 'includes/alerts.html' %}
+
+        {%block content%}
+<!-- Write Main Page Stuff Here -->
+        {%endblock%}
+
+                
+       
+
+        <!-- Start of .footer -->
+        {%include 'includes/base/footer.html'%} 
+        <!-- End of .footer -->
+
+        <!-- search box -->
+        {%include 'includes/base/search.html'%}
+
+        <!-- Popup Form -->
+        {%include 'includes/base/bTestBooking.html'%}
+    </div>
+
+    
+
+    <!-- scroll top - to top page -->
+    <div class="to-top" id="scrollUp"><i class="fa fa-angle-up"></i></div>
+
+
+
+    <!------------------------------------------------------------------------>
+
+    <!-- jQuery -->
+    <script src="{% static 'base/js/jQuery-3.4.1.js' %}"></script>
+
+    <!-- wow js animation -->
+    <script src="{% static 'base/js/wow.min.js' %}"></script>
+
+    <!-- owl-carousel js -->
+    <script src="{% static 'base/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'base/js/carousel.js' %}"></script>
+
+    <!-- fancybox 3 js -->
+    <script src="{% static 'base/js/jquery.fancybox.js' %}"></script>
+
+    <!-- Counter up -->
+    <script src="{% static 'base/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'base/js/jquery.countup.min.js' %}"></script>
+
+    <!-- bootstrap js -->
+    <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+
+    <!-- customer js -->
+    <script src="{% static 'base/js/index.js' %}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    var doc = new jsPDF();
+    
+    function saveDiv() {
+        
+        var divContents = document.getElementById("pdf").innerHTML;
+        var a = window.open('', '', 'height=500, width=500');
+        a.document.write('<html>');
+        a.document.write('<body>');
+        a.document.write(divContents);
+        a.document.write('</body></html>');
+        a.document.close();
+        a.print();
+    }
+
+	$(document).ready(function(){
+		$('.thumb a').click(function(e){
+			e.preventDefault();
+			$('.mainImage img').attr('src', $(this).attr("href"));
+		})
+	})
+
+    
+</script>
+
+
+</body>
+
+</html>

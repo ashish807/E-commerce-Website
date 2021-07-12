@@ -1,0 +1,136 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block content%}
+<!-- Start of .header-bottom-4 -->
+<header class="header-bottom-4">
+    <img src="{%static 'base/images/banner/banner4.jpg'%}">
+    <div class="header-bottom-4__bg">
+        <div class="icon">
+            <img src="{%static 'base/images/banner/banner-shape.png'%}">
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="section-title">Proceed  <span>With</span></h1>
+        <br>
+
+
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{%url 'site-landing'%}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'store'%}">Store</a></li>
+            <li class="breadcrumb-item"><a href="{%url 'cart'%}">Cart</a></li>
+            <li class="breadcrumb-item active">Appointment</li>
+        </ol>
+
+
+    </div>
+</header>
+        <!-- Start of departments-3 -->
+        <section class="departments-3 main-blog" style="margin-top:0px !important;">
+           
+            <div class="container container_no-sidebar" style="margin-top:0px;">
+                <div class="article">
+                    <div class="departments-3__single">
+                        <div class="prices">
+                            <h1 class="title">Review your Appointment</h1>
+                            <div class="prices-block">
+                                <div class="item">
+                                   
+                                    <div class="content">
+                                        <h1 class="name">Bill</h1>
+                                        
+                                        <ul class="lists">
+                                            
+                                            <li class="list-item">
+                                                <span class="text"><b>Total price:</b> </span>
+                                                <span class="price">₹ {{sub_total}}</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="que"> <b>Tax:</b></span>
+                                                <span class="ans">₹ {{tax}}</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="que"> <b>Grand Total:</b> </span>
+                                                <span class="ans">₹ {{total}}</span>
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                   <div class="content">
+                                    <a href="{%url 'payment_appoinment'%}" class="btn btn_pink">Place Order</a>
+
+                                   </div>
+                                    
+                                </div>
+                                {%for detail in appointment_details%}
+                                {% if forloop.counter|divisibleby:2 %}
+                                <div class="item" style="margin-left: 25px;">
+                                {%else%}
+                                <div class="item" >
+                                {%endif%}
+                                <h1 class="title">{{detail.full_name}}  </h1>
+                               <span> (  {{detail.email}} )</span> 
+                                    <h1 class="title"><p> {{detail.date}}, {{detail.time}}</h1>
+                                        
+                                    <ul class="lists">
+                                        <li class="list-item">
+                                            <span class="text">Appointment Number</span><span class="price">{{detail.appointment_number}}</span>
+                                        </li>
+                                       
+                                        <li class="list-item">
+                                            <span class="text">State</span><span
+                                                class="price">{{detail.state.state}}</span>
+                                        </li>
+                                     
+                                    </ul>
+                                    <h5> <b> Blood Categories</b></h5>
+                                    <ul class="lists">
+                                        {%for name, price in blood_dic.items%}
+                                        <li class="list-item">
+                                            <span class="text">{{name}}</span><span class="price">₹{{price}}</span>
+                                        </li>
+                                       
+                                        {%endfor%}
+                                    </ul>
+                                    <h5> <b> Hospital Details</b></h5>
+                                    <ul class="lists">
+                                        <li class="list-item">
+                                            <span class="text">Name</span><span class="price">{{detail.hospital.hospital_name}}</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="text">Address</span><span class="price">{{detail.hospital.address_line_1}}</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="text">State</span><span
+                                                class="price">{{detail.hospital.state}}</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="text">City</span><span
+                                                class="price">{{detail.hospital.city}}</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="text">Phone</span><span
+                                                class="price">{{detail.hospital.phone}}</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="text">Email</span><span
+                                                class="price">{{detail.hospital.email}}</span>
+                                        </li>
+                                     
+                                    </ul>
+                                    <a href="{%url 'remove_appointment' detail.appointment_number %}" onclick="return confirm('Are you sure you want to delete?')" class="btn btn-danger"> Remove</a>
+
+                                </div>
+                            {%endfor%}
+                                
+                            </div>
+                        </div>
+                        
+                             
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End of departments-3 -->
+{%endblock%}
